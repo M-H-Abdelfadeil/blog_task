@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Front\PostController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostController::class , 'index'] );
+Route::get('blog/posts/{post}', [PostController::class , 'show'])->name('blog.posts.show');
+
+Auth::routes();
+
+
+
+// in file routes/dashboard
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
