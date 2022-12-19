@@ -4,7 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\PostController;
 
-Route::get('/custom-home', [App\Http\Controllers\HomeController::class, 'index'])->name('custom.home');
+Route::get('/custom-home', [PostController::class, 'index'])->name('custom.home');
 
 Route::group(['middleware' => 'auth'], function () {
 

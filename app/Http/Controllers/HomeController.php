@@ -16,15 +16,4 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        $posts = Post::whereUserId(auth()->id())->select('id', 'title', 'created_at')->get();
-        return view('home',compact('posts'));
-    }
 }

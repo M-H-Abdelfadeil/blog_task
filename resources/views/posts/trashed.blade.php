@@ -29,8 +29,8 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->created_at }}</td>
                                 <td>
-                                    <button data-url="{{ route('posts.restore',$post->id) }}" data-type="restore" data-message="Are you sure to restore ? " class="btn btn-primary btn-action">Restore</button>
-                                    <button data-url="{{ route('posts.forceDelete',$post->id) }}" data-type="force_destroy" data-message="Are you sure to delete it permanently ? " class="btn btn-danger btn-action">Force Delete</button>
+                                    <button data-url="{{ route('posts.restore',$post->id) }}" data-type="restore" data-message="Are you sure to restore ? " class="btn btn-primary btn-action" title="Restore">Restore<i class="fa fa-minus"></i></button>
+                                    <button data-url="{{ route('posts.forceDelete',$post->id) }}" data-type="force_destroy" data-message="Are you sure to delete it permanently ? " class="btn btn-danger btn-action" title="Force Delete">Force Delete<i class="fa fa-times"></i></button>
                                 </td>
                             </tr>
                         @empty
@@ -43,6 +43,9 @@
 
                         </tbody>
                       </table>
+                </div>
+                <div class="mt-5">
+                    {{ $posts->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

@@ -46,4 +46,17 @@ class Post extends Model
     {
         return date('j F Y', strtotime($value));
     }
+
+
+
+    // relations
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

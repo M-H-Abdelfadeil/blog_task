@@ -27,27 +27,30 @@
         {{ $post->content }}
     </div>
     <hr>
-    
+
     @auth
         <div>
-            <form method="POST" action="{{ route('posts.store') }}">
+            <form method="POST" action="{{ route('comments.store',$post->id) }}">
                 @csrf
                 <div class="form-group">
                     <label for="content">Comment</label>
-                    <textarea name="comment" class="form-control @error('comment') is-invalid @enderror" id="content"></textarea>
+                    <textarea name="comment" class="form-control @error('comment') is-invalid @enderror" id="content">{{ old('comment') }}</textarea>
                     @error('comment')
                         <small class="invalid-feedback">{{ $message }}</small>
                     @enderror
-                   
+
                 </div>
                 <button type="submit" class="btn btn-primary">Comment</button>
             </form>
-        </div> 
+        </div>
     @else
     <div class="alert alert-warning">
-        To be able to comment, <a href="{{ route('login') }}">log in  </a>  
-    </div>     
+        To be able to comment, <a href="{{ route('login') }}">log in  </a>
+    </div>
     @endauth
-    <h1>Comments</h1>
+    @if($post->comments->count())
+        @include('blog.posts.inc.comments',['comments'=>$post->comments])
+    @endif
+
 </div>
 @endsection

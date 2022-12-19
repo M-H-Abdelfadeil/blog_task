@@ -11,8 +11,8 @@
 
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <a href="{{ route('posts.create') }}" class="btn btn-primary">Add new post</a>
-                        <a href="{{ route('posts.trashed') }}" class="btn btn-danger">Trashed</a>
+                        <a href="{{ route('posts.create') }}" class="btn btn-primary">Add new post <i class="fa fa-plus-circle"></i></a>
+                        <a href="{{ route('posts.trashed') }}" class="btn btn-danger">Trashed <i class="fa fa-trash"></i></a>
                     </div>
 
 
@@ -32,9 +32,9 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->created_at }}</td>
                                 <td>
-                                    <a href="{{ route('posts.show',$post->id) }}" class="btn btn-primary">Show</a>
-                                    <a href="{{ route('posts.edit',$post->id) }}" class="btn btn-primary">Edit</a>
-                                    <button data-url="{{ route('posts.destroy',$post->id) }}" data-type="destroy" data-message="Are you sure to move it to the trash ? " class="btn btn-danger btn-action">Delete</button>
+                                    <a href="{{ route('posts.show',$post->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                    <a href="{{ route('posts.edit',$post->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                    <button data-url="{{ route('posts.destroy',$post->id) }}" data-type="destroy" data-message="Are you sure to move it to the trash ? " class="btn btn-danger btn-action ml-3"><i class="fa fa-trash"></i></button>
                                 </td>
 
                             </tr>
@@ -48,6 +48,9 @@
 
                         </tbody>
                       </table>
+                </div>
+                <div class="mt-5">
+                    {{ $posts->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

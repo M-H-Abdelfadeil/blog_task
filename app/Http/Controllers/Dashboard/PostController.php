@@ -19,7 +19,8 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::whereUserId(auth()->id())->select('id', 'title', 'created_at')->get();
+        $posts = Post::whereUserId(auth()->id())
+                ->select('id', 'title', 'created_at')->paginate(12);
         return view('home',compact('posts'));
     }
 
@@ -137,11 +138,24 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
+     /**
+      * posts trashed
+      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+      */
+
     public function trashed(){
-        $posts = Post::whereUserId(auth()->id())->onlyTrashed()->select('id', 'title', 'created_at')->get();
+        $posts = Post::whereUserId(auth()->id())
+                ->onlyTrashed()
+                ->select('id', 'title', 'created_at')
+                ->paginate(12);
         return view('posts.trashed',compact('posts'));
     }
 
+    /**
+     * restore post
+     * @param mixed $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function restore($id){
         $post = Post::whereUserId(auth()->id())->onlyTrashed()->findOrfail($id);
         $this->authorize('restore', $post);
@@ -151,6 +165,11 @@ class PostController extends Controller
 
     }
 
+    /**
+     * force Delete
+     * @param mixed $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function forceDelete($id){
         $post = Post::whereUserId(auth()->id())->onlyTrashed()->findOrfail($id);
         $this->authorize('restore', $post);
